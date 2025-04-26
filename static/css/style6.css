@@ -1,0 +1,154 @@
+html, body {
+  height: 100%; /* Ensures full height */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #59BAA6, #1E3A5F);
+  background-attachment: fixed; /* Keeps the gradient fixed */
+  background-size: cover; /* Ensures it covers the whole screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #14213D;
+  min-height: 100vh; /* Ensures it covers the full viewport height */
+}
+
+
+
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #053229; /* Navbar background */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 30px; /* Ensuring uniform height */
+    z-index: 1000;
+    overflow: hidden;
+  }
+  
+  /* Left Side - Logo */
+  .navbar-left .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Centered Navigation Links */
+  .navbar-center ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+  }
+  
+  .navbar-center ul li {
+    display: inline;
+  }
+  
+  .navbar-center ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-center ul li a i {
+    margin-right: 8px;
+  }
+  
+  .navbar-center ul li a:hover {
+    color: #59BAA6; /* Hover effect */
+  }
+  
+  /* Right Side - Logout Button */
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+  
+  .navbar-right button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background-color:  #59BAA6; /* Default button background */
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  .navbar-right button:hover {
+    background-color: white; 
+    color: black;/* Button hover effect */
+  }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#saved-recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center align */
+  gap: 20px; /* Keeps spacing between cards */
+  width: 75%;
+  margin: 80px auto 0; /* Increases space from navbar to first card */
+}
+
+/* Increase margin ONLY for the first recipe card */
+.recipe-card:first-child {
+  margin-top: 50px; /* Adjust as needed */
+}
+
+.recipe-card {
+    
+    color: #14213D;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.658);
+   
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    
+    padding: 40px;
+    margin-top: 30px;
+    width: 100%; /* Ensures the recipe cards take full width of the list */
+    max-width: 500px; /* Prevents them from stretching too wide */
+}
+
+
+
+.recipe-card h2 {
+    margin-top: 0;
+}
+
+.recipe-card p {
+    margin: 10px 0;
+}
+
+.delete-recipe {
+    padding: 10px 20px;
+    background-color: #14213D ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.delete-recipe:hover {
+    background-color: #59BAA6;
+    color: black;
+}

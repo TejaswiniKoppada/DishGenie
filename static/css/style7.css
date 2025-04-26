@@ -1,0 +1,98 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #59BAA6, #1E3A5F);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #14213D;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #053229; /* Navbar background */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 30px; /* Ensuring uniform height */
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+.logo{
+    font-weight: bold;
+    color:white ;
+    font-size: x-large;
+}
+
+.home-btn {
+    background-color: #59BAA6;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 25px;
+}
+
+.home-btn:hover {
+    background-color: white;
+    color: black;
+}
+
+.help-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers all cards */
+    gap: 20px; /* Keeps spacing between help sections */
+    padding: 20px;
+    margin-top: 90px; /* Adds extra space between navbar and first card */
+}
+
+.help-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255, 255, 255, 0.658); /* White background for the card */
+    border-radius: 12px; /* Rounded corners */
+    padding: 20px;
+    width: 80%; /* Adjust width */
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.help-section:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 12px #e6dfd9(0, 0, 0, 0.2);
+}
+
+.help-section .text {
+    flex: 1; /* Ensures text takes available space */
+    max-width: 50%;
+}
+
+.help-section img {
+    max-width: 40%;
+    height: auto;
+    border-radius: 8px; /* Rounded edges for images */
+}
+
+h2 {
+    color: #14213D; /* Title color */
+}
+
+p {
+    color: black; /* Darker text */
+    font-size: larger;
+}

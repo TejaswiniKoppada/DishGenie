@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookItUp - Home</title>
+    <link rel="stylesheet" href="/static/css/style1_1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">DishGenie</span>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="/inventory"><i class="fas fa-box"></i> Pantry Tracker</a></li>
+                <li><a href="/recipe_selection"><i class="fas fa-carrot"></i> Recipe Assistant</a></li>
+                <li><a href="/saved_recipes"><i class="fas fa-heart"></i> Favorite Recipes</a></li>
+                <li><a href="/surprise_recipe"><i class="fas fa-magic"></i> Surprise me!</a></li>
+                <li><a href="/help"><i class="fas fa-question-circle"></i> Help</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="title-container">
+            <h1 class="welcome-message">Welcome, <span>{{ user_name }}</span>!</h1>
+            <p class="description">
+                Unlock a world of flavors with DishGenie! Our smart AI suggests the perfect recipes based on what you have, making cooking effortless and exciting. ✨
+            </p>
+        </div>
+
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="slide fade">
+                    <img src="{{ url_for('static', filename='caro_images/recipe-1.jpg') }}">
+                </div>
+                <div class="slide fade">
+                    <img src="{{ url_for('static', filename='caro_images/recipe-2.jpg') }}">
+                </div>
+                <div class="slide fade">
+                    <img src="{{ url_for('static', filename='caro_images/recipe-3.jpg') }}">
+                </div>
+                <div class="slide fade">
+                    <img src="{{ url_for('static', filename='caro_images/recipe-4.jpg') }}">
+                </div>
+                <div class="slide fade">
+                    <img src="{{ url_for('static', filename='caro_images/recipe-5.jpg') }}">
+                </div>
+            </div>
+            <div class="dots-container"></div>
+        </div>
+
+        <div class="section">
+            <h2>About Us</h2>
+            <p>DishGenie is an AI-powered recipe recommendation system that simplifies cooking. Using deep learning, it suggests recipes based on your available ingredients, reducing food waste and making meal planning effortless. Built by a dedicated team of developers and engineers, DishGenie ensures a seamless, smart, and user-friendly cooking experience.
+                Our platform helps users manage their pantry efficiently and discover new dishes with ease. Save your favorite recipes, share them with others, and enjoy personalized meal suggestions. Whether you're a beginner or a pro, DishGenie makes cooking more enjoyable and stress-free!
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Development Team</h2>
+            <div class="team-members">
+                <div class="team-member">
+                    <h3>Tejaswini Koppada</h3>
+                    <p>Project Architect, UI/UX Designer, Tester </p>
+                </div>
+                <div class="team-member">
+                    <h3>Kadipina Neelima</h3>
+                    <p>Data Engineer, Deep Learning Engineer</p>
+                </div>
+                <div class="team-member">
+                    <h3>J.Jyothi Sri</h3>
+                    <p>Data Annotator</p>
+                </div>
+                <div class="team-member">
+                    <h3>R.Kaushik</h3>
+                    <p>Project Coordinator</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2023 CookItUp. All rights reserved by Team 16.
+    </div>
+
+   
+    <script src="/static/js/script1_1.js" defer></script>
+</body>
+</html>

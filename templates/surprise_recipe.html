@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Recipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+       body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #59BAA6, #1E3A5F);
+    color: #14213D;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150vh;
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto; /* Enables vertical scrolling */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #053229; /* Navbar background */
+    color: black;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 30px; /* Ensuring uniform height */
+    z-index: 1000;
+}
+
+/* Left Side - Logo */
+.navbar-left .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Centered Navigation Links */
+.navbar-center ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar-center ul li {
+    display: inline;
+}
+
+.navbar-center ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.navbar-center ul li a i {
+    margin-right: 8px;
+}
+
+.navbar-center ul li a:hover {
+    color:#59BAA6; /* Hover effect */
+}
+
+/* Right Side - Logout Button */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+
+.navbar-right button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: #59BAA6; /* Default button background */
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar-right button:hover {
+    background-color: white; 
+    color: black;/* Button hover effect */
+}
+
+/* Recipe Card Styles */
+.recipe-card {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.658);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    color: #14213D;
+    position: relative;
+    z-index: 1;
+    margin-top: 60px; /* Prevents overlap with navbar */
+}
+
+.recipe-card h2 {
+    margin-top: 0;
+}
+
+.recipe-card p {
+    margin: 10px 0;
+}
+
+/* Back Button */
+.back-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #053229;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.back-button:hover {
+    background-color: #59BAA6;
+    color: black;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #59BAA6;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #1E3A5F;
+}
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">DishGenie</span>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="/home"><i class="fas fa-book"></i> Home</a></li>
+                <li><a href="/inventory"><i class="fas fa-box"></i> Pantry Tracker</a></li>
+                <li><a href="/recipe_selection"><i class="fas fa-carrot"></i> Recipe Assistant</a></li>
+                <li><a href="/saved_recipes"><i class="fas fa-heart"></i> Favorite Recipes</a></li>
+                
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+    <div class="recipe-card">
+        {% if recipe %}
+            <h2>{{ recipe.name }}</h2>
+            <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+            <p><strong>Time Required:</strong> {{ recipe.time }} minutes</p>
+            <p><strong>Recipe:</strong> {{ recipe.recipe }}</p>
+            <p><strong>Nutrition:</strong> Protein: {{ recipe.protein }}g, Carbs: {{ recipe.carbs }}g, Fats: {{ recipe.fats }}g</p>
+            <p><strong>Sides:</strong> {{ recipe.sides }}</p>
+            <div class="used-ingredients">
+                <p><strong>Used Ingredients:</strong></p>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                        <li>{{ ingredient }} </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+    </div>
+    <button class="back-button" onclick="window.location.href='/home'">Back to Home</button>
+    <script>
+        // Add an event listener to the logout button
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Make a request to the /logout route
+            fetch('/logout', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // Redirect to the first.html page
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
+            });
+        });
+    </script>
+</body>
+</html>

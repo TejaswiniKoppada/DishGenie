@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CookItUp - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #59BAA6, #1E3A5F);
+      color: #14213D;
+      text-align: center;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #053229;
+      padding: 15px;
+      color: white;
+      font-size: x-large;
+      font-weight: bold;
+    }
+
+    .content {
+      margin: 50px auto;
+      max-width: 1200px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content h1 {
+      color: #14213D;
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .content p {
+      font-size: larger;
+      color: white;
+      line-height: 1.6;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .content img {
+      width: 45%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-container {
+      margin-top: 30px;
+    }
+
+    .login-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: white;
+      background-color: #053229;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(250, 248, 248, 0.3);
+    }
+
+    .login-btn:hover {
+      background-color: #59BAA6;
+      color: black;
+      box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+
+    .section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section img {
+      width: 45%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .section .text {
+      width: 45%;
+      font-size: larger;
+      color: white;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .footer {
+      background-color: #053229;
+      color: white;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 14px;
+    }
+
+    /* Media Queries for Tablet View */
+    @media (max-width: 1024px) {
+      .content h1 {
+        font-size: 32px;
+      }
+
+      .content p {
+        font-size: large;
+      }
+
+      .section .text {
+        font-size: large;
+      }
+
+      .login-btn {
+        padding: 12px 24px;
+        font-size: 16px;
+      }
+    }
+
+    /* Media Queries for Mobile View */
+    @media (max-width: 768px) {
+      .navbar {
+        font-size: large;
+        padding: 10px;
+      }
+
+      .content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .content h1 {
+        font-size: 28px;
+      }
+
+      .content p {
+        font-size: medium;
+        text-align: center;
+      }
+
+      .content img {
+        width: 100%;
+        max-width: 500px;
+        margin-top: 20px;
+      }
+
+      .section {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .section img {
+        width: 100%;
+        max-width: 500px;
+        margin-bottom: 20px;
+      }
+
+      .section .text {
+        width: 100%;
+        text-align: center;
+      }
+
+      .login-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content h1 {
+        font-size: 24px;
+      }
+
+      .content p {
+        font-size: small;
+      }
+
+      .section .text {
+        font-size: medium;
+      }
+
+      .login-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    DishGenie
+  </div>
+
+  <div class="content">
+    <div>
+      <h1>Welcome to DishGenie</h1>
+      <p>
+        Discover delicious recipes with just the ingredients you have! Our AI-powered system uses 
+        advanced machine learning models (CNN & ANN) to provide the best recipe recommendations. 
+        Whether you want to plan meals, track your pantry, or save your favorite recipes, DishGenie has you covered!
+      </p>
+      <div class="login-container">
+        <button class="login-btn" onclick="redirectToLogin()">Login / Sign Up</button>
+      </div>
+    </div>
+    <img src="{{ url_for('static', filename='caro_images/first3.jpg') }}" alt="DishGenie">
+  </div>
+
+  <div class="section">
+    <img src="{{ url_for('static', filename='caro_images/first1.jpg') }}" alt="Discover Recipes">
+    <div class="text">
+      <h2>Discover New Recipes</h2>
+      <p>Explore a wide variety of recipes tailored to your ingredients. Our AI ensures you never run out of ideas!
+          From quick meals to gourmet dishes, find the perfect recipe for any occasion.
+          Let DishGenie transform your cooking experience with smart and delicious suggestions!
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="text">
+      <h2>Plan Your Meals</h2>
+      <p>
+        Effortlessly plan your meals for the week. DishGenie helps you stay organized and stress-free.
+Save time by creating meal plans based on your available ingredients.
+Get personalized suggestions to maintain a balanced and healthy diet!
+      </p>
+    </div>
+    <img src="{{ url_for('static', filename='caro_images/first2.jpg') }}" alt="Plan Meals">
+  </div>
+
+  <div class="footer">
+    &copy; 2025 DishGenie. All rights reserved by Team 16.
+  </div>
+
+  <script>
+    // Function to redirect to login page
+    function redirectToLogin() {
+      window.location.href = "/login_page";
+    }
+
+    // Function to check if an element is in the viewport
+    function isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    }
+
+    // Function to add visible class when scrolled into view
+    function handleScroll() {
+      const sections = document.querySelectorAll('.content, .section');
+      sections.forEach(section => {
+        if (isInViewport(section)) {
+          section.classList.add('visible');
+        }
+      });
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Trigger handleScroll on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      handleScroll();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,536 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #59BAA6, #1E3A5F);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #14213D;
+  height:150vh;
+}
+
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #053229;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 30px;
+  z-index: 1000;
+}
+
+.navbar-left .logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-center ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar-center ul li {
+  display: inline;
+}
+
+.navbar-center ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.navbar-center ul li a i {
+  margin-right: 8px;
+}
+
+.navbar-center ul li a:hover {
+  color: #59BAA6;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.navbar-right button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  background-color: #59BAA6;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.navbar-right button:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Making Process Popup */
+.making-process-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 600px;
+  max-height: 70vh; /* Limit height and add scroll */
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  overflow-y: auto; /* Add scrollbar */
+}
+
+.making-process-popup.active {
+  display: block;
+  opacity: 1;
+}
+
+.making-process-popup h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #14213D;
+}
+
+.making-process-content {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Close button for popup */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #14213D;
+}
+
+.close-btn:hover {
+  color: #59BAA6;
+}
+
+/* Blur effect for main container */
+.blur-background {
+  filter: blur(5px);
+}
+
+/* Fix container alignment */
+.container {
+  padding: 40px;
+  padding-bottom: 50px;
+  width: 80%;
+  max-width: 900px;
+  margin: 80px auto; /* Adjusted margin to avoid navbar overlap */
+  background-color: rgba(255, 255, 255, 0.658);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  color: black;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: all 0.5s ease;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color:#14213D ;
+  margin-top: -10px;
+}
+
+.recipe-details p {
+  margin: 10px 0;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.buttons button {
+  padding: 10px 20px;
+  background-color: #07342b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: large;
+}
+
+.buttons button:hover {
+  background-color: #59BAA6;
+  color: black;
+
+}
+
+.hidden {
+  display: none;
+}
+
+/* Save Recipe Button */
+.save-share {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.wrapper {
+  display: inline-block;
+}
+
+.wrapper a {
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #ECECEC;
+  border: 2px solid #07342b;;
+  letter-spacing: 1px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+}
+
+.wrapper a span {
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #07342b;;
+  transition: all 0.35s;
+}
+
+.wrapper a:hover {
+  color: #59BAA6;
+}
+
+.wrapper a:hover:after {
+  width: 100%;
+}
+
+/* Download Button */
+/* Save Recipe Button */
+.save-share {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.wrapper {
+  display: inline-block;
+}
+
+.wrapper a {
+  display: block;
+  width: 150px;
+  height: 40px;
+  line-height: 40px;
+  font-size: large;
+  font-family: sans-serif;
+  text-decoration: none;
+  color:  black;
+  border: 2px solid #07342b;
+  letter-spacing: 1px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+}
+
+.wrapper a span {
+  position: relative;
+  z-index: 2;
+}
+
+.wrapper a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #59BAA6;;
+  transition: all 0.35s;
+  color: black;
+  font-size: larger;
+  font-weight:bolder
+}
+
+.wrapper a:hover {
+  color: #14213D;
+  
+}
+
+.wrapper a:hover:after {
+  width: 100%;
+}
+
+/* New Download Button */
+/* New Download Button */
+#ms-container {
+  width: 60px; /* Further decreased width */
+  height: 60px; /* Further decreased height */
+  position: absolute; /* Position it absolutely within the container */
+  bottom: 10px; /* Align to the bottom */
+  right: 10px; /* Align to the right */
+}
+
+.ms-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  border: 3px solid #07342b; /* Further decreased border thickness */
+  border-radius: 100%;
+}
+
+.ms-content-inside {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.ms-line-down-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: rotate(0deg);
+  transition: transform 0s ease;
+}
+
+#ms-download {
+  display: none;
+}
+
+#ms-download:checked ~ .ms-line-down-container {
+  transform: rotate(-360deg);
+  transition: transform 1.5s ease 1.25s;
+}
+
+.ms-line-down {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 3px; /* Further decreased width */
+  height: 35px; /* Further decreased height */
+  background: white;
+  border-radius: 50px;
+  transition: height 0.5s ease;
+}
+
+#ms-download:checked ~ .ms-line-down-container .ms-line-down {
+  height: 3px; /* Further decreased height */
+  top: -5px; /* Further adjusted position */
+  animation: ms-bounce 0.5s forwards 0.55s;
+}
+
+#ms-download:checked ~ .ms-line-down-container .ms-line-down:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -28px; /* Further adjusted position */
+  right: 0;
+  bottom: 0;
+  width: 60px; /* Further decreased width */
+  height: 60px; /* Further decreased height */
+  border: 3px solid transparent; /* Further decreased border thickness */
+  border-radius: 100%;
+  animation: ms-border-fill 0.5s forwards 3s;
+}
+
+.ms-line-point {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 17px; /* Further decreased width */
+  height: 40px; /* Further decreased height */
+  transition: height 0.15s ease 0.45s;
+}
+
+#ms-download:checked ~ .ms-line-point {
+  height: 20px; /* Further decreased height */
+}
+
+#ms-download:checked ~ .ms-line-point:before {
+  transform: rotate(90deg);
+  right: -3px; /* Further adjusted position */
+  animation: ms-check-right 0.25s forwards 3s;
+}
+
+#ms-download:checked ~ .ms-line-point:after {
+  transform: rotate(-90deg);
+  left: -3px; /* Further adjusted position */
+  animation: ms-check-left 0.25s forwards 3s;
+}
+
+.ms-line-point:before,
+.ms-line-point:after {
+  content: '';
+  position: absolute;
+  width: 3px; /* Further decreased width */
+  height: 22px; /* Further decreased height */
+  bottom: -3px; /* Further adjusted position */
+  background: white;
+  border-radius: 50px;
+  transition: transform 0.15s ease 0.47s, left 0.15s ease 0.47s, right 0.15s ease 0.47s;
+}
+
+.ms-line-point:before {
+  right: 0px;
+  transform: rotate(45deg);
+}
+
+.ms-line-point:after {
+  left: 0px;
+  transform: rotate(-45deg);
+}
+
+@keyframes ms-bounce {
+  0% {
+    top: -5px; /* Further adjusted position */
+  }
+  25% {
+    top: -75px; /* Further adjusted position */
+  }
+  50% {
+    top: -82px; /* Further adjusted position */
+  }
+  100% {
+    top: -57px; /* Further adjusted position */
+  }
+}
+
+@keyframes ms-check-left {
+  0% {
+    transform: rotate(-90deg);
+    left: -3px; /* Further adjusted position */
+    height: 22px; /* Further decreased height */
+  }
+  100% {
+    transform: rotate(-45deg);
+    left: 0px;
+    height: 13px; /* Further decreased height */
+  }
+}
+
+@keyframes ms-check-right {
+  0% {
+    transform: rotate(90deg);
+    right: -3px; /* Further adjusted position */
+    height: 22px; /* Further decreased height */
+    bottom: -3px; /* Further adjusted position */
+  }
+  100% {
+    transform: rotate(45deg);
+    right: 3px; /* Further adjusted position */
+    height: 24px; /* Further decreased height */
+    bottom: -4px; /* Further adjusted position */
+  }
+}
+
+@keyframes ms-border-fill {
+  0% {
+    border: 3px solid transparent; /* Further decreased border thickness */
+  }
+  100% {
+    border: 3px solid #FFFFFF; /* Further decreased border thickness */
+  }
+}
+
+/* Recipe Image Container */
+.recipe-image-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.recipe-image {
+  max-width: 150%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ /* Additional Styles for Inline Message */
+ .inline-message {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Hidden by default */
+}
+
+.inline-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.inline-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Adjust the save-share section for better alignment */
+.save-share {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}

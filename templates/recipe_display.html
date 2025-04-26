@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Display</title>
+    <link rel="stylesheet" href="/static/css/style4.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">DishGenie</span>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="/home"><i class="fas fa-book"></i> Home </a></li>
+                <li><a href="/inventory"><i class="fas fa-box"></i> Pantry Tracker</a></li>
+                <li><a href="/recipe_selection"><i class="fas fa-carrot"></i> Recipe Assistant</a></li>
+                <li><a href="/saved_recipes"><i class="fas fa-heart"></i> Favorite Recipes</a></li>
+                <li><a href="/surprise_recipe"><i class="fas fa-magic"></i> Surprise me!</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+
+    <!-- Recipe Display -->
+    <div class="container">
+        <h1>Predicted Recipes</h1>
+        <div id="recipe-list">
+            {% if recipes %}
+                {% for recipe in recipes %}
+                    <div class="recipe-card">
+                        <a href="/recipe_details/{{ recipe.name }}">
+                            <button class="cssbuttons-io-button">
+                                {{ recipe.name }}
+                                <div class="icon">
+                                    <svg
+                                        height="24"
+                                        width="24"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M0 0h24v24H0z" fill="none"></path>
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                            fill="currentColor"
+                                        ></path>
+                                    </svg>
+                                </div>
+                            </button>
+                        </a>
+                        <p><strong>Cuisine:</strong> {{ recipe.cuisine }}</p>
+                        <p><strong>Time:</strong> {{ recipe.time }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        // Add an event listener to the logout button
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Make a request to the /logout route
+            fetch('/logout', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // Redirect to the first.html page
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
+            });
+        });
+    </script>
+
+    <script src="/static/js/script4.js" defer></script>
+</body>
+</html>

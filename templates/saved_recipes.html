@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Recipes</title>
+    <link rel="stylesheet" href="/static/css/style6.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">DishGenie</span>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="/home"><i class="fas fa-book"></i> Home</a></li>
+                <li><a href="/inventory"><i class="fas fa-box"></i> Pantry Tracker</a></li>
+                <li><a href="/recipe_selection"><i class="fas fa-carrot"></i> Recipe Assistant</a></li>
+                <li><a href="/surprise_recipe"><i class="fas fa-magic"></i> Surprise me!</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- <h1>Saved Recipes</h1> -->
+        <div id="saved-recipes-list">
+            {% if recipes %}
+                {% for recipe in recipes %}
+                    <div class="recipe-card">
+                        <h2>{{ recipe["Recipe Name"] }}</h2>
+                        <p><strong>Time:</strong> {{ recipe["Time Required (minutes)"] }} minutes</p>
+                        <p><strong>Cuisine:</strong> {{ recipe["Style"] }}</p>
+                        <p><strong>Instructions:</strong> {{ recipe["Recipe (How to Make)"] }}</p>
+                        <button class="delete-recipe" data-recipe-name="{{ recipe['Recipe Name'] }}">Delete</button>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No saved recipes found.</p>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        // Add an event listener to the logout button
+        document.getElementById('logout-btn').addEventListener('click', function() {
+            // Make a request to the /logout route
+            fetch('/logout', {
+                method: 'GET',
+            })
+            .then(response => {
+                if (response.redirected) {
+                    // Redirect to the first.html page
+                    window.location.href = response.url;
+                }
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
+            });
+        });
+    </script>
+
+    <script src="/static/js/script6.js"></script>
+</body>
+</html>

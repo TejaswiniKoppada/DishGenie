@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details</title>
+    <link rel="stylesheet" href="/static/css/style5.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .recipe-details, .buttons, .save-share {
+            margin-bottom: 20px;
+        }
+        .recipe-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .recipe-image {
+            max-width: 100%;
+            height: auto;
+        }
+        .blur-background {
+            filter: blur(5px);
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <span class="logo">DishGenie</span>
+        </div>
+        <div class="navbar-center">
+            <ul>
+                <li><a href="/home"><i class="fas fa-book"></i> Home</a></li>
+                <li><a href="/inventory"><i class="fas fa-box"></i> Pantry Tracker</a></li>
+                <li><a href="/recipe_selection"><i class="fas fa-carrot"></i> Recipe Assistant</a></li>
+                <li><a href="/recipe_display"><i class="fas fa-gift"></i> Predicted Recipes</a></li>
+                <li><a href="/saved_recipes"><i class="fas fa-heart"></i> Favorite Recipes</a></li>
+                <li><a href="/surprise_recipe"><i class="fas fa-magic"></i> Surprise me!</a></li>
+            </ul>
+        </div>
+        <div class="navbar-right">
+            <button id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>{{ recipe.name }}</h1>
+        <div class="recipe-details">
+            <p><strong>Time Required:</strong> {{ recipe.time }} minutes</p>
+            <p><strong>Style:</strong> {{ recipe.style }}</p>
+            <p><strong>Cooking Process Video:</strong> <a href="{{ recipe.youtube_link }}" target="_blank">Watch on YouTube</a></p>
+        </div>
+
+        <!-- Recipe Image Section -->
+        <div class="recipe-image-container">
+            <img id="recipeImage" alt="Recipe Image" class="recipe-image" src="{{ url_for('static', filename='recipeimages/' + recipe.name + '.jpg') }}">
+        </div>
+
+        <div class="buttons">
+            <button id="calorie-btn">Calories</button>
+            <button id="extra-btn">Sidekicks</button>
+            <button id="making-process-btn">Making Process</button>
+        </div>
+
+        <div id="calorie-info" class="hidden">
+            <p><strong>Protein:</strong> {{ recipe.protein }}g</p>
+            <p><strong>Carbohydrates:</strong> {{ recipe.carbs }}g</p>
+            <p><strong>Fats:</strong> {{ recipe.fats }}g</p>
+        </div>
+
+        <div id="extra-info" class="hidden">
+            <p><strong>Goes Well With:</strong> {{ recipe.sides }}</p>
+        </div>
+
+        <div class="save-share">
+            <div class="wrapper">
+                <a href="#" onclick="saveRecipe(event)"><span>Save Recipe!</span></a>
+            </div>
+            <div id="inline-message" class="inline-message"></div>
+            <div id="ms-container">
+                <label for="ms-download">
+                    <div class="ms-content">
+                        <div class="ms-content-inside">
+                            <input type="checkbox" id="ms-download" />
+                            <div class="ms-line-down-container">
+                                <div class="ms-line-down"></div>
+                            </div>
+                            <div class="ms-line-point"></div>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Making Process Popup -->
+    <div class="making-process-popup" id="making-process-popup">
+        <button class="close-btn" onclick="closeMakingProcessPopup()"><i class="fas fa-arrow-left"></i></button>
+        <h2>Making Process</h2>
+        <div class="making-process-content">
+            <p>{{ recipe.recipe }}</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+    <script>
+        // Toggle calorie info
+        document.getElementById("calorie-btn").addEventListener("click", function () {
+            const calorieInfo = document.getElementById("calorie-info");
+            calorieInfo.classList.toggle("hidden");
+        });
+
+        // Toggle extra info
+        document.getElementById("extra-btn").addEventListener("click", function () {
+            const extraInfo = document.getElementById("extra-info");
+            extraInfo.classList.toggle("hidden");
+        });
+
+        // Save recipe
+        function saveRecipe(event) {
+            event.preventDefault();
+            const recipeName = "{{ recipe.name }}";
+            const inlineMessage = document.getElementById("inline-message");
+
+            fetch("/save_recipe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ recipe_name: recipeName }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    inlineMessage.textContent = data.message;
+                    inlineMessage.classList.remove("error");
+                    inlineMessage.classList.add("success");
+                    inlineMessage.style.display = "block";
+
+                    setTimeout(() => {
+                        window.location.href = "/saved_recipes";
+                    }, 2000);
+                } else {
+                    inlineMessage.textContent = data.message;
+                    inlineMessage.classList.remove("success");
+                    inlineMessage.classList.add("error");
+                    inlineMessage.style.display = "block";
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                inlineMessage.textContent = "An error occurred. Please try again.";
+                inlineMessage.classList.remove("success");
+                inlineMessage.classList.add("error");
+                inlineMessage.style.display = "block";
+            });
+        }
+
+        // Download recipe as PDF
+        document.getElementById("ms-download").addEventListener("change", function () {
+            if (this.checked) {
+                document.getElementById("calorie-info").classList.remove("hidden");
+                document.getElementById("extra-info").classList.remove("hidden");
+
+                const element = document.querySelector(".container");
+                html2canvas(element).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF();
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save("recipe.pdf");
+
+                    document.getElementById("calorie-info").classList.add("hidden");
+                    document.getElementById("extra-info").classList.add("hidden");
+                });
+            }
+        });
+
+        // Toggle making process popup
+        document.getElementById("making-process-btn").addEventListener("click", function () {
+            const popup = document.getElementById("making-process-popup");
+            const container = document.querySelector(".container");
+
+            popup.classList.add("active");
+            container.classList.add("blur-background");
+        });
+
+        // Close making process popup
+        function closeMakingProcessPopup() {
+            const popup = document.getElementById("making-process-popup");
+            const container = document.querySelector(".container");
+
+            popup.classList.remove("active");
+            container.classList.remove("blur-background");
+        }
+
+
+ 
+
+    
+    </script>
+</body>
+</html>

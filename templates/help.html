@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - CookItUp</title>
+    <link rel="stylesheet" href="/static/css/style7.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DishGenie - Help</div>
+        <button class="home-btn" onclick="window.location.href='/home'">Home</button>
+    </nav>
+
+    <div class="help-container">
+        
+
+        <section class="help-section">
+            <div class="text">
+            <h2>1. DishGenie</h2>
+            <p>DishGenie is an AI-powered recipe recommendation and pantry management system. It predicts recipes based on user-selected ingredients using deep learning and helps organize pantry items efficiently.</p></div>
+            <img src="{{ url_for('static', filename='help_images/help1.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>2. Login / Signup</h2>
+            <p>Register with your name, email, and password to create an account. Your credentials are securely stored, allowing seamless access to your personalized cooking experience.</p></div>
+            <img src="{{ url_for('static', filename='help_images/help2.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>3. Pantry Tracker</h2>
+            <p>Add ingredients via text or image upload. The system verifies them against the dataset and updates your pantry. Keep track of what you have and avoid food waste!</p></div>
+            <img src="{{ url_for('static', filename='help_images/help3.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>4. Selecting Ingredients</h2>
+            <p>Choose available ingredients from a searchable multi-select list. Select your desired items and proceed to generate recipes tailored to your pantry.</p></div>
+            <img src="{{ url_for('static', filename='help_images/help4.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>5. Generating recipes</h2>
+            <p>Our AI predicts the best recipes based on your selected ingredients. View details, including cuisine type, prep time, and nutritional breakdown.</p></div>
+            <img src="{{ url_for('static', filename='help_images/help5.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>6. Saving Your Favorite Recipes with Download</h2>
+            <p>Save your favorite recipes for later access. Download recipes as PDFs or revisit them in the saved recipes section, with the option to delete when needed.</p></div>
+            <img src="{{ url_for('static', filename='help_images/help6.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <div class="text">
+            <h2>7. Surprise recipe</h2>
+            <p>Feeling adventurous? Get a random AI-generated recipe, regardless of your pantry items, and try something new and exciting!</p></div>
+            <img src="{{ url_for('static', filename='help_images/help7.jpg') }}">
+        </section>
+
+        <section class="help-section">
+            <h2>Need More Help?</h2>
+            <p>For any issues, contact our support person Tejaswini (dishgenie16@gmail.com) ❤️</p>
+        </section>
+    </div>
+
+    <!-- <script src="{{ url_for('static', filename='help.js') }}"></script> -->
+</body>
+</html>
